@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TrackPiece : MonoBehaviour
 {
+    public Vector3 endOffset;
+
     // Start is called before the first frame update
     void Start()
     {
