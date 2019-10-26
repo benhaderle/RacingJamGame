@@ -8,12 +8,12 @@ public class TrackGeneratorEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-
         DrawDefaultInspector();
 
         TrackGenerator trackGen = (TrackGenerator)target;
+
         if (GUILayout.Button("Generate Piece")) {
-            trackGen.GeneratePiece(0);
+            trackGen.GeneratePiece(Random.Range(0, trackGen.trackPiecePrefabs.Length));
         }
         if (GUILayout.Button("Reset Generator")) {
             trackGen.Reset();

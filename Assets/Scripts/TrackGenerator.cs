@@ -21,7 +21,12 @@ public class TrackGenerator : MonoBehaviour
         TrackPiece nextPiece = Instantiate(trackPiecePrefabs[type], this.transform);
 
         if (activeTrackPieces.Count > 0) {
-            nextPiece.transform.position = lastPieceAdded.transform.position + lastPieceAdded.endOffset;
+            nextPiece.transform.rotation = lastPieceAdded.transform.rotation;
+            nextPiece.transform.Rotate(lastPieceAdded.endRotation);
+            nextPiece.transform.position = lastPieceAdded.transform.position + lastPieceAdded.endOffset.x * lastPieceAdded.transform.right +
+                lastPieceAdded.endOffset.y * lastPieceAdded.transform.up +
+                lastPieceAdded.endOffset.z * lastPieceAdded.transform.forward;
+            
         }
         else {
             
@@ -33,6 +38,9 @@ public class TrackGenerator : MonoBehaviour
 
     public void Reset()
     {
+        foreach(TrackPiece t in activeTrackPieces) {
+           if (t.gameObject != null) DestroyImmediate(t.gameObject);
+        }
         activeTrackPieces.Clear();
     }
 }
