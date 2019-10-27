@@ -6,8 +6,11 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public UIController uiController;
+    public SoundController soundController;
+    public GameObject car;
+
     public string playerName = "PlayerName";
-    public float acceleration = 0.001f;
+    public float acceleration = 0.01f;
 
     private float gameTime = 0.0f;
     public float GameTime
@@ -67,6 +70,7 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("GameController: gameOver()");
         uiController.GameOver();
+        soundController.StopBGM();
 
         isStarted = false;
     }
