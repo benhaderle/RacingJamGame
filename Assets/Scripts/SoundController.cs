@@ -9,7 +9,7 @@ public class SoundController : MonoBehaviour
     private AudioSource bgm;
 
     public AudioSource defaultsound;
-    public AudioSource fastersound;
+    //public AudioSource fastersound;
     public AudioSource crash;
     // Start is called before the first frame update
     void Start()
@@ -25,12 +25,12 @@ public class SoundController : MonoBehaviour
         {
             bgm.Play();
         }
-        speed = gameController.Speed;
+       // speed = gameController.Speed;
 
-        if (speed > 10)
-        {        
-            bgm = fastersound;
-        }
+        //if (speed > 10)
+       // {        
+          //  bgm = fastersound;
+       // }
     }
 
     void PlayCrash()
