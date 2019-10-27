@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
 
     public Text textTime;
     public Text textDistance;
+    public Text textSpeed;
 
     public Text textGameOver;
     public Text textGameOverTime;
@@ -31,6 +32,7 @@ public class UIController : MonoBehaviour
 
         textTime.gameObject.SetActive(true);
         textDistance.gameObject.SetActive(true);
+        textSpeed.gameObject.SetActive(true);
 
         textGameOver.gameObject.SetActive(false);
         textGameOverTime.gameObject.SetActive(false);
@@ -48,6 +50,7 @@ public class UIController : MonoBehaviour
 
         textTime.gameObject.SetActive(false);
         textDistance.gameObject.SetActive(false);
+        textSpeed.gameObject.SetActive(false);
 
         textGameOver.gameObject.SetActive(false);
         textGameOverTime.gameObject.SetActive(false);
@@ -62,6 +65,10 @@ public class UIController : MonoBehaviour
         textGameOver.text = "You Crashed!! :b";
         textGameOverTime.text = "Time: " + gameController.GameTime.ToString();
         textGameOverDistance.text = "Distance: " + gameController.Distance.ToString();
+
+        textTime.gameObject.SetActive(false);
+        textDistance.gameObject.SetActive(false);
+        textSpeed.gameObject.SetActive(false);
 
         textGameOver.gameObject.SetActive(true);
         textGameOverTime.gameObject.SetActive(true);
@@ -82,6 +89,7 @@ public class UIController : MonoBehaviour
 
         textTime.gameObject.SetActive(false);
         textDistance.gameObject.SetActive(false);
+        textSpeed.gameObject.SetActive(false);
 
         buttonRestart.gameObject.SetActive(false);
         textGameOver.gameObject.SetActive(false);
@@ -95,7 +103,8 @@ public class UIController : MonoBehaviour
         if (gameController.IsStarted) 
         {
             textTime.text = "Time: " + gameController.GameTime;
-            textDistance.text = "Distance: " + gameController.Distance;   
+            textDistance.text = "Distance: " + gameController.Distance;
+            textSpeed.text = "Speed: " + gameController.Speed;
         }
     }
 }
