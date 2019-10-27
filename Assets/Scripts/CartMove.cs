@@ -8,13 +8,12 @@ public class CartMove : MonoBehaviour
     private Vector3 pos;
     public float speed = 0.000000001f;
     public float turnspeed = 0.0000001f;
-    public float speedFactor = 1;
+    public float speedFactor = 1f;
+    public float fallspeed = 0.1f;
+    public float fallheight = 0.2f;
 
     private RaycastHit track;
 
-
-    private Vector3 rot; //x is mouse vertical look, y is our orientation
-    public float lookSpeed = 1.5f;
     private bool lockCursor = true;
     public AudioSource engineSound;
 
@@ -35,22 +34,23 @@ public class CartMove : MonoBehaviour
         cart = gameObject.GetComponent<Rigidbody>();
         cart.useGravity = false;
 
-        //originalCamRotation = Camera.main.transform.localRotation;
-        //originalCharRotation = transform.localRotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //engineSound.Play();
         pos = transform.position;
 
 
         
         if (Physics.Raycast(transform.position, -transform.up, out track, 20))
         {
-            Debug.Log("track" + track.normal);
-            Debug.Log("body" + transform.up);
+            //Debug.Log("track" + track.normal);
+            //Debug.Log("body" + transform.up);
+
+            Debug.Log(track.distance);
+            
+
 
             Vector3 cproduct = Vector3.Cross(track.normal, transform.forward).normalized;
 
@@ -77,6 +77,11 @@ public class CartMove : MonoBehaviour
 
             float forwardspeed = speed * Time.deltaTime;
             pos += transform.forward * forwardspeed;
+
+            if (track.distance > 0.2)
+            {
+                pos += -1 * transform.up * fallspeed;
+            }
         }
 
         cart.MovePosition(pos);
