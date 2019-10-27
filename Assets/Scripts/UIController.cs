@@ -5,49 +5,78 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public GameController gameController;
     public Button buttonStart;
     public Button buttonRestart;
-    public Text textGameOver;
+
     public Text textTime;
     public Text textDistance;
 
+    public Text textGameOver;
+    public Text textGameOverTime;
+    public Text textGameOverDistance;
 
-    void gameStart()
+    public Button buttonTestGameOver;
+
+    private GameController gameController;
+
+    void GameStart()
     {
-        Debug.Log("Button clicked: gameStart()");
-        //buttonStart.setActive(false);
-        //buttonRestart.setActive(true);
-        gameController.gameStart();
-        //TODO: Show/Hide
+        Debug.Log("Button clicked: UIController.GameStart()");
+        gameController.GameStart();
+
+        buttonStart.gameObject.SetActive(false);
+        buttonRestart.gameObject.SetActive(true);
+
+        textGameOver.gameObject.SetActive(false);
+        textGameOverTime.gameObject.SetActive(false);
+        textGameOverDistance.gameObject.SetActive(false);
     }
-    void gameRestart()
+    void GameRestart()
     {
-        Debug.Log("Button clicked: gameRestart()");
-        //buttonStart.setActive(true);
-        //buttonRestart.setActive(false);
-        gameController.gameRestart();
-        //TODO: Show/Hide
+        Debug.Log("Button clicked: UIController.GameRestart()");
+        gameController.GameRestart();
+
+        buttonStart.gameObject.SetActive(true);
+        buttonRestart.gameObject.SetActive(false);
     }
-    public void showGameOverText()
+    public void GameOver()
     {
-        textGameOver.text = "test gameOver text";
+        Debug.Log("UIController.GameOver()");
+
+        textGameOver.text = "You Crashed!! :b";
+        textGameOverTime.text = "Time: " + gameController.GameTime.ToString();
+        textGameOverDistance.text = "Distance: " + gameController.Distance.ToString();
+
+        textGameOver.gameObject.SetActive(true);
+        textGameOverTime.gameObject.SetActive(true);
+        textGameOverDistance.gameObject.SetActive(true);
+
+        buttonStart.gameObject.SetActive(false);
+        buttonRestart.gameObject.SetActive(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //Button btn = buttonStart.GetComponent<Button>();
-        //buttonStart.GetComponent<Button>().onClick.AddListener(gameStart);
-        //buttonRestart.GetComponent<Button>().onClick.AddListener(gameRestart);
-        buttonStart.onClick.AddListener(gameStart);
-        buttonRestart.onClick.AddListener(gameRestart);
+        gameController = Singleton<GameController>.Instance;
+
+        buttonStart.onClick.AddListener(GameStart);
+        buttonRestart.onClick.AddListener(GameRestart);
+        buttonTestGameOver.onClick.AddListener(gameController.GameOver);
+
+        buttonRestart.gameObject.SetActive(false);
+        textGameOver.gameObject.SetActive(false);
+        textGameOverTime.gameObject.SetActive(false);
+        textGameOverDistance.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        textTime.text = "Time: " + gameController.GameTime;
-        textDistance.text = "Distance: " + gameController.Distance;
+        if (gameController.IsStarted) 
+        {
+            textTime.text = "Time: " + gameController.GameTime;
+            textDistance.text = "Distance: " + gameController.Distance;   
+        }
     }
 }
