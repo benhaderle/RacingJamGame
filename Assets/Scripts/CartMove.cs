@@ -20,9 +20,9 @@ public class CartMove : MonoBehaviour
     TrackPiece lastPiece;
     float endAngleRemaing = 0;
 
+
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("hittag");
         if (collision.gameObject.tag == "obs")
         {
 
@@ -127,7 +127,7 @@ public class CartMove : MonoBehaviour
         float forwardspeed = speed * Time.deltaTime;
         pos += transform.forward * forwardspeed;
 
-        cart.position = pos;
+        cart.MovePosition(pos);
         //CursorLock();
 
     }

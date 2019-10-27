@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         //transform.LookAt(car.transform.position);
-        transform.position = car.transform.position + new Vector3(0, 4, -6); ;// new Vector3(0, 4, -6);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 7, -10), .5f); // new Vector3(0, 4, -6);
+        //transform.position = car.transform.position - car.transform.forw;
     }
 }

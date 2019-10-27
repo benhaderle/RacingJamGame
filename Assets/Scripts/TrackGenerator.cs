@@ -24,7 +24,7 @@ public class TrackGenerator : MonoBehaviour
     TrackPiece lastPieceAdded;
     TrackPiece oldestPiece;
 
-    float timer = 10f;
+    float timer = 1f;
 
     private void Start()
     {
@@ -101,7 +101,7 @@ public class TrackGenerator : MonoBehaviour
             oldestPiece = pieceToDelete.childPiece;
             Destroy(pieceToDelete.gameObject);
 
-            timer = 10 / speed;
+            timer = 3 / speed;
         }
     }
 
