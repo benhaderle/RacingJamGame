@@ -17,6 +17,9 @@ public class CartMove : MonoBehaviour
     private bool lockCursor = true;
     public AudioSource engineSound;
 
+    TrackPiece lastPiece;
+    float endAngleRemaing = 0;
+
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("hittag");
@@ -55,9 +58,24 @@ public class CartMove : MonoBehaviour
         if (Physics.Raycast(pos, -transform.up, out track, 10))
         {
 
-            pos = track.point + track.normal.normalized * .5f;
+            pos = track.point + track.normal.normalized * 1f;
 
-            cart.rotation = Quaternion.FromToRotation(Vector3.up, track.normal.normalized); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
+            cart.rotation = Quaternion.FromToRotation(Vector3.up, track.normal.normalized);
+           /* Vector3 rot = transform.rotation.eulerAngles;
+            if (lastPiece == null || lastPiece != track.collider.transform.parent.GetComponent<TrackPiece>()) {
+                ;
+
+                lastPiece = track.collider.transform.parent.GetComponent<TrackPiece>();
+                //endAngleRemaing = lastPiece.endRotation.y;
+            }
+
+            if (lastPiece != null) {
+                 //* Quaternion.FromToRotation(Vector3.forward, lastPiece.endRotation);
+            }
+            
+
+            Debug.Log(transform.forward - track.collider.transform.parent.GetComponent<TrackPiece>().endRotation);*/
+            //transform.rotation = Quaternion.LookRotation(transform.forward, track.normal.normalized); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
 
             //Debug.Log("track" + track.normal);
             //Debug.Log("body" + transform.up);
