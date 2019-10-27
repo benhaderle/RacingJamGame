@@ -8,7 +8,7 @@ public class CarStatus : MonoBehaviour
     [Header("Speed")]
     public Text textSpeed;
 
-    private float speed = 0.0f;
+    // private float speed = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +17,6 @@ public class CarStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed += 0.001f;
-        textSpeed.text = speed.ToString() + " MPH";
+        textSpeed.text = Singleton<GameController>.Instance.Speed.ToString() + " MPH";
     }
 }
