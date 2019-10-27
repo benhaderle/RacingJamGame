@@ -42,8 +42,8 @@ public class CartMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Singleton<GameController>.Instance.IsStarted)
-       // {
+        if (Singleton<GameController>.Instance.IsStarted)
+        {
             pos = transform.position;
 
             if (Input.GetKey(KeyCode.A))
@@ -64,7 +64,7 @@ public class CartMove : MonoBehaviour
 
                 pos = track.point + track.normal.normalized * .5f;
 
-                cart.rotation = Quaternion.FromToRotation(Vector3.up, track.normal); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
+                cart.rotation = Quaternion.FromToRotation(Vector3.up, track.normal.normalized); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
 
                 //Debug.Log("track" + track.normal);
                 //Debug.Log("body" + transform.up);
@@ -111,12 +111,19 @@ public class CartMove : MonoBehaviour
             }
 
 
+
+
+<<<<<<< HEAD
+        cart.MovePosition(pos);
+        //CursorLock();
+=======
             float forwardspeed = speed * Time.deltaTime;
             pos += transform.forward * forwardspeed;
+>>>>>>> eff498d2f86008fd412fd941daed97d2f4742912
 
             cart.position = pos;
             //CursorLock();
-        //}
+        }
     }
 
     private void FixedUpdate()

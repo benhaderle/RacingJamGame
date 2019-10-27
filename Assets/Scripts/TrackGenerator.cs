@@ -68,7 +68,7 @@ public class TrackGenerator : MonoBehaviour
         }
 
         //random rotation
-       // nextPiece.transform.Rotate(0, 0, Random.Range(0, MAXROTATIONS) * ROTUNIT, Space.Self);
+        nextPiece.transform.Rotate(0, 0, Random.Range(0, MAXROTATIONS) * ROTUNIT, Space.Self);
 
         //check for collisionss
         /*foreach (TrackPiece t in activeTrackPieces) {

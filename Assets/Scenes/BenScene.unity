@@ -320,6 +320,8 @@ MonoBehaviour:
   trackPiecePrefabs:
   - {fileID: 7645337213142474884, guid: f7eb050618dae824f9a8117f70e87e80, type: 3}
   - {fileID: 5449288948818157063, guid: e8693630e7e2a884387f25e6bb84f7e5, type: 3}
+  - {fileID: 4453780824709948624, guid: 5364937486abf6045bbcd76a28cfe4fb, type: 3}
+  - {fileID: 939405268929303497, guid: dcd8f84b66716db4294d3f186b200e46, type: 3}
 --- !u!4 &121916216
 Transform:
   m_ObjectHideFlags: 0
