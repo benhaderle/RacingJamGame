@@ -13,6 +13,7 @@ using NaughtyAttributes;
 //move along ship forward vector
 public class TrackGenerator : MonoBehaviour
 {
+    public float speed = 1;
     public TrackPiece[] trackPiecePrefabs;
 
     const int MAXROTATIONS = 12;
@@ -74,6 +75,11 @@ public class TrackGenerator : MonoBehaviour
             }
         }*/
 
+
+        //generate obstacles on piece
+        int numToGenerate = Mathf.RoundToInt(Mathf.Clamp(3 / speed, .500001f, 5));
+        nextPiece.GenerateObstacles(numToGenerate);
+
         //add piece to the end of the track
         activeTrackPieces.Add(nextPiece);
         lastPieceAdded = nextPiece;
@@ -93,14 +99,14 @@ public class TrackGenerator : MonoBehaviour
             oldestPiece = pieceToDelete.childPiece;
             Destroy(pieceToDelete.gameObject);
 
-            timer = .5f;
+            timer = 3 / speed;
         }
     }
 
     public void Reset()
     {
         foreach(TrackPiece t in activeTrackPieces) {
-           if (t.gameObject != null) DestroyImmediate(t.gameObject);
+            if (t.gameObject != null) DestroyImmediate(t.gameObject);
         }
         activeTrackPieces.Clear();
 
