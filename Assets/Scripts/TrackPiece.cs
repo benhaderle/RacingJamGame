@@ -6,6 +6,7 @@ public class TrackPiece : MonoBehaviour
 {
     public Vector3 endOffset;
     public Vector3 endRotation;
+    public TrackPiece childPiece;
 
     // Start is called before the first frame update
     void Start()
