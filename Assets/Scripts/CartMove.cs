@@ -39,79 +39,83 @@ public class CartMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pos = transform.position;
-
-        if (Input.GetKey(KeyCode.A)) {
-
-            pos += -transform.right * turnspeed * Time.deltaTime;
-
-        }
-        if (Input.GetKey(KeyCode.D)) {
-
-            pos += transform.right * turnspeed * Time.deltaTime;
-
-        }
-
-        if (Physics.Raycast(pos, -transform.up, out track, 10))
+        if (Singleton<GameController>.Instance.IsStarted) 
         {
+            pos = transform.position;
 
-            pos = track.point + track.normal.normalized * .5f;
-
-            cart.rotation = Quaternion.FromToRotation(Vector3.up, track.normal.normalized); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
-
-            //Debug.Log("track" + track.normal);
-            //Debug.Log("body" + transform.up);
-
-            //Debug.Log(track.distance);
-
-
-
-            /* Vector3 cproduct = Vector3.Cross(track.normal, transform.forward).normalized;
-
-             if (Input.GetKey("a"))
-             {
-
-                 pos += cproduct * turnspeed * Time.deltaTime *(-1);
-
-             }
-             if (Input.GetKey("d"))
-             {
-
-                 pos += cproduct * turnspeed * Time.deltaTime;
-
-             }*/
-
-            //Debug.Log(Mathf.Abs(transform.up.y) == Mathf.Abs(track.normal.y));
-            //Debug.Log(Mathf.Abs(transform.up.z) == Mathf.Abs(track.normal.z));
-
-
-            /*if (!(Mathf.Abs(transform.up.x) == Mathf.Abs(track.normal.x) && Mathf.Abs(transform.up.y) == Mathf.Abs(track.normal.y) 
-                && Mathf.Abs(transform.up.z) == Mathf.Abs(track.normal.z)))
+            if (Input.GetKey(KeyCode.A))
             {
-                //Debug.Log("need to rotate");
-                transform.rotation = Quaternion.FromToRotation(Vector3.up, track.normal); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
-            }*/
 
-            // transform.Rotate(transform.forward, turnspeed * Time.deltaTime);
-            //transform.Rotate(transform.right, turnspeed * Time.deltaTime);
+                pos += -transform.right * turnspeed * Time.deltaTime;
+
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+
+                pos += transform.right * turnspeed * Time.deltaTime;
+
+            }
+
+            if (Physics.Raycast(pos, -transform.up, out track, 10))
+            {
+
+                pos = track.point + track.normal.normalized * .5f;
+
+                cart.rotation = Quaternion.FromToRotation(Vector3.up, track.normal.normalized); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
+
+                //Debug.Log("track" + track.normal);
+                //Debug.Log("body" + transform.up);
+
+                //Debug.Log(track.distance);
 
 
 
-            //if (track.distance > 0.2)
-            //{
-            //    pos += -1 * transform.up * fallspeed;
-            //}
+                /* Vector3 cproduct = Vector3.Cross(track.normal, transform.forward).normalized;
+
+                 if (Input.GetKey("a"))
+                 {
+
+                     pos += cproduct * turnspeed * Time.deltaTime *(-1);
+
+                 }
+                 if (Input.GetKey("d"))
+                 {
+
+                     pos += cproduct * turnspeed * Time.deltaTime;
+
+                 }*/
+
+                //Debug.Log(Mathf.Abs(transform.up.y) == Mathf.Abs(track.normal.y));
+                //Debug.Log(Mathf.Abs(transform.up.z) == Mathf.Abs(track.normal.z));
+
+
+                /*if (!(Mathf.Abs(transform.up.x) == Mathf.Abs(track.normal.x) && Mathf.Abs(transform.up.y) == Mathf.Abs(track.normal.y) 
+                    && Mathf.Abs(transform.up.z) == Mathf.Abs(track.normal.z)))
+                {
+                    //Debug.Log("need to rotate");
+                    transform.rotation = Quaternion.FromToRotation(Vector3.up, track.normal); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
+                }*/
+
+                // transform.Rotate(transform.forward, turnspeed * Time.deltaTime);
+                //transform.Rotate(transform.right, turnspeed * Time.deltaTime);
+
+
+
+                //if (track.distance > 0.2)
+                //{
+                //    pos += -1 * transform.up * fallspeed;
+                //}
+            }
+
+
+
+
+            float forwardspeed = speed * Time.deltaTime;
+            pos += transform.forward * forwardspeed;
+
+            cart.position = pos;
+            //CursorLock();
         }
-
-
-
-
-        float forwardspeed = speed * Time.deltaTime;
-        pos += transform.forward * forwardspeed;
-
-        cart.position = pos;
-        //CursorLock();
-
     }
 
     private void FixedUpdate()

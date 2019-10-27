@@ -7,8 +7,8 @@ public class SoundController : MonoBehaviour
     private float speed;
     private GameController gameController;
 
-    public float st1;
-    public float st2;
+    public float SoundThreshold1;
+    public float SoundThreshold2;
 
     public AudioSource bgm;
     public AudioSource crash;
@@ -28,10 +28,10 @@ public class SoundController : MonoBehaviour
         }
         speed = gameController.Speed;
 
-       if (st1!=0 && speed >= st1)
+        if ( Mathf.Abs(SoundThreshold1) > 1e-6 && speed >= SoundThreshold1)
         {        
             bgm.pitch = 1.25f;
-        } else if (st2!=0 && speed >= st2)
+        } else if (Mathf.Abs(SoundThreshold2) > 1e-6 && speed >= SoundThreshold2)
         {
             bgm.pitch = 1.5f;
         } else
@@ -40,8 +40,13 @@ public class SoundController : MonoBehaviour
         }
     }
 
-    void PlayCrash()
+    public void PlayCrash()
     {
         crash.Play();
+    }
+
+    public void StopBGM()
+    {
+        bgm.Stop();
     }
 }
