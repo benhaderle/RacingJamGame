@@ -1,22 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CarStatus : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
-    [Header("Speed")]
-    public Text textSpeed;
 
-    // private float speed = 0.0f;
+    public GameObject car;
+
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        textSpeed.text = Singleton<GameController>.Instance.Speed.ToString() + "\n MPH";
+        //transform.LookAt(car.transform.position);
+        transform.position = car.transform.position + new Vector3(0, 4, -6); ;// new Vector3(0, 4, -6);
     }
 }

@@ -580,8 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfc9f72b787d5e46bce2f7210c75521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultsound: {fileID: 0}
-  fastersound: {fileID: 0}
+  defaultsound: {fileID: 258843267}
   crash: {fileID: 35903993}
 --- !u!135 &2140831075
 SphereCollider:

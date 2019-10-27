@@ -6,8 +6,8 @@ public class CartMove : MonoBehaviour
 {
     private Rigidbody cart;
     private Vector3 pos;
-    public float speed = 0.000000001f;
-    public float turnspeed = 0.0000001f;
+    public float speed;
+    public float turnspeed;
     public float speedFactor = 1f;
     public float fallspeed = 0.1f;
     public float fallheight = 0.2f;
@@ -19,7 +19,7 @@ public class CartMove : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-
+        Debug.Log("hittag");
         if (collision.gameObject.tag == "obs")
         {
 
@@ -41,51 +41,76 @@ public class CartMove : MonoBehaviour
     {
         pos = transform.position;
 
+        if (Input.GetKey(KeyCode.A)) {
 
-        
-        if (Physics.Raycast(transform.position, -transform.up, out track, 20))
+            pos += -transform.right * turnspeed * Time.deltaTime;
+
+        }
+        if (Input.GetKey(KeyCode.D)) {
+
+            pos += transform.right * turnspeed * Time.deltaTime;
+
+        }
+
+        if (Physics.Raycast(pos, -transform.up, out track, 10))
         {
+
+            pos = track.point + track.normal.normalized * .5f;
+
+            cart.rotation = Quaternion.FromToRotation(Vector3.up, track.normal.normalized); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
+
             //Debug.Log("track" + track.normal);
             //Debug.Log("body" + transform.up);
 
-            Debug.Log(track.distance);
-            
-
-
-            Vector3 cproduct = Vector3.Cross(track.normal, transform.forward).normalized;
-
-            if (Input.GetKey("a"))
-            {
-
-                pos += cproduct * turnspeed * Time.deltaTime *(-1);
-
-            }
-            if (Input.GetKey("d"))
-            {
-
-                pos += cproduct * turnspeed * Time.deltaTime;
-
-            }
+            //Debug.Log(track.distance);
 
 
 
-            if (transform.up != track.normal)
+            /* Vector3 cproduct = Vector3.Cross(track.normal, transform.forward).normalized;
+
+             if (Input.GetKey("a"))
+             {
+
+                 pos += cproduct * turnspeed * Time.deltaTime *(-1);
+
+             }
+             if (Input.GetKey("d"))
+             {
+
+                 pos += cproduct * turnspeed * Time.deltaTime;
+
+             }*/
+
+            //Debug.Log(Mathf.Abs(transform.up.y) == Mathf.Abs(track.normal.y));
+            //Debug.Log(Mathf.Abs(transform.up.z) == Mathf.Abs(track.normal.z));
+
+
+            /*if (!(Mathf.Abs(transform.up.x) == Mathf.Abs(track.normal.x) && Mathf.Abs(transform.up.y) == Mathf.Abs(track.normal.y) 
+                && Mathf.Abs(transform.up.z) == Mathf.Abs(track.normal.z)))
             {
                 //Debug.Log("need to rotate");
-                transform.rotation = Quaternion.FromToRotation(Vector3.up, track.normal);
-            }
+                transform.rotation = Quaternion.FromToRotation(Vector3.up, track.normal); //Slerp(Quaternion.Euler(Vector3.up), Quaternion.Euler(track.normal), .1f);
+            }*/
 
-            float forwardspeed = speed * Time.deltaTime;
-            pos += transform.forward * forwardspeed;
+            // transform.Rotate(transform.forward, turnspeed * Time.deltaTime);
+            //transform.Rotate(transform.right, turnspeed * Time.deltaTime);
 
-            if (track.distance > 0.2)
-            {
-                pos += -1 * transform.up * fallspeed;
-            }
+
+
+            //if (track.distance > 0.2)
+            //{
+            //    pos += -1 * transform.up * fallspeed;
+            //}
         }
 
-        cart.MovePosition(pos);
-        CursorLock();
+
+
+
+        float forwardspeed = speed * Time.deltaTime;
+        pos += transform.forward * forwardspeed;
+
+        cart.position = pos;
+        //CursorLock();
 
     }
 
