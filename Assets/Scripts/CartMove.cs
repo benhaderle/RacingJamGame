@@ -17,6 +17,9 @@ public class CartMove : MonoBehaviour
     private bool lockCursor = true;
     public AudioSource engineSound;
 
+    TrackPiece lastPiece;
+    float endAngleRemaing = 0;
+
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("hittag");
@@ -39,7 +42,7 @@ public class CartMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Singleton<GameController>.Instance.IsStarted) 
+        if (Singleton<GameController>.Instance.IsStarted)
         {
             pos = transform.position;
 
@@ -120,7 +123,7 @@ public class CartMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
     }
 
     void CursorLock()
