@@ -50,6 +50,7 @@ MonoBehaviour:
   endOffset: {x: 0, y: 0, z: 100}
   endRotation: {x: 0, y: 0, z: 0}
   childPiece: {fileID: 0}
+  curved: 0
 --- !u!64 &732634132
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -214,6 +215,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: f7bd6f7e08a8ff648a5bbd24e71f3725,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 81c78a463b5ba0842a461845b3362a06, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7bd6f7e08a8ff648a5bbd24e71f3725, type: 3}
 --- !u!4 &2610964735969201779 stripped
