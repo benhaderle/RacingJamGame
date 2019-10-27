@@ -15,6 +15,8 @@ public class UIController : MonoBehaviour
     public Text textGameOverTime;
     public Text textGameOverDistance;
 
+    public RawImage rawImageGameTitle;
+
     public Button buttonTestGameOver;
 
     private GameController gameController;
@@ -25,11 +27,16 @@ public class UIController : MonoBehaviour
         gameController.GameStart();
 
         buttonStart.gameObject.SetActive(false);
-        buttonRestart.gameObject.SetActive(true);
+        //buttonRestart.gameObject.SetActive(true);
+
+        textTime.gameObject.SetActive(true);
+        textDistance.gameObject.SetActive(true);
 
         textGameOver.gameObject.SetActive(false);
         textGameOverTime.gameObject.SetActive(false);
         textGameOverDistance.gameObject.SetActive(false);
+
+        rawImageGameTitle.gameObject.SetActive(false);
     }
     void GameRestart()
     {
@@ -38,6 +45,15 @@ public class UIController : MonoBehaviour
 
         buttonStart.gameObject.SetActive(true);
         buttonRestart.gameObject.SetActive(false);
+
+        textTime.gameObject.SetActive(false);
+        textDistance.gameObject.SetActive(false);
+
+        textGameOver.gameObject.SetActive(false);
+        textGameOverTime.gameObject.SetActive(false);
+        textGameOverDistance.gameObject.SetActive(false);
+
+        rawImageGameTitle.gameObject.SetActive(true);
     }
     public void GameOver()
     {
@@ -63,6 +79,9 @@ public class UIController : MonoBehaviour
         buttonStart.onClick.AddListener(GameStart);
         buttonRestart.onClick.AddListener(GameRestart);
         buttonTestGameOver.onClick.AddListener(gameController.GameOver);
+
+        textTime.gameObject.SetActive(false);
+        textDistance.gameObject.SetActive(false);
 
         buttonRestart.gameObject.SetActive(false);
         textGameOver.gameObject.SetActive(false);

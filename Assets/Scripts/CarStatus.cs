@@ -17,6 +17,6 @@ public class CarStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textSpeed.text = Singleton<GameController>.Instance.Speed.ToString() + " MPH";
+        textSpeed.text = Singleton<GameController>.Instance.Speed.ToString() + "\n MPH";
     }
 }
