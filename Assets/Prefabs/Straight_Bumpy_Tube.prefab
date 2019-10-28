@@ -59,8 +59,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ddaa528677155408a8bd5c8c3527d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 8800289657420478703, guid: a4277f70f091aa14e85c3bc6f1821672,
-    type: 3}
+  obstaclePrefab:
+  - {fileID: 8800289657420478703, guid: a4277f70f091aa14e85c3bc6f1821672, type: 3}
+  - {fileID: 8800289657420478703, guid: 2d05f573867dcad4f8bff0e5a97f1179, type: 3}
+  - {fileID: 8800289657420478703, guid: 08b93da954e7a8a469a015ae940e1be9, type: 3}
   endOffset: {x: 0, y: 0, z: 100}
   endRotation: {x: 0, y: 0, z: 0}
   childPiece: {fileID: 0}

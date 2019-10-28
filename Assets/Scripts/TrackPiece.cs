@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrackPiece : MonoBehaviour
 {
-    public GameObject obstaclePrefab;
+    public GameObject[] obstaclePrefab;
 
     public Vector3 endOffset;
     public Vector3 endRotation;
@@ -23,7 +23,7 @@ public class TrackPiece : MonoBehaviour
     {
         if (!curved) {
             for(int i = 0; i < numToGenerate; i++) {
-                GameObject newObstacle = Instantiate(obstaclePrefab, this.transform);
+                GameObject newObstacle = Instantiate(obstaclePrefab[Random.Range(0,obstaclePrefab.Length)], this.transform);
 
                 //find where to generate
                 newObstacle.transform.localPosition = Vector3.up * 7;

@@ -7,7 +7,9 @@ public class GameController : MonoBehaviour
 {
     public UIController uiController;
     public SoundController soundController;
-    public GameObject car;
+    public TrackGenerator trackGenerator;
+
+    public CartMove car;
 
     public string playerName = "PlayerName";
     public float acceleration = 0.01f;
@@ -22,7 +24,8 @@ public class GameController : MonoBehaviour
     {
         get { return distance; }
     }
-    private float speed = 0.0f;
+    private float speed;
+    public float startSpeed = 30f;
     public float Speed
     {
         get { return speed; }
@@ -37,7 +40,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-
+        speed = startSpeed;
     }
 
     void Update()
@@ -58,12 +61,18 @@ public class GameController : MonoBehaviour
         isStarted = true;
         gameTime = 0;
         distance = 0;
+        speed = startSpeed;
 
+        trackGenerator.Reset();
+        car.ResetCar();
     }
 
     public void GameRestart()
     {
         Debug.Log("GameController: gameRestart()");
+
+        trackGenerator.Reset();
+
     }
 
     public void GameOver()

@@ -6,11 +6,13 @@ public class CartMove : MonoBehaviour
 {
     private Rigidbody cart;
     private Vector3 pos;
-    public float speed;
+    private float speed;
     public float turnspeed;
     public float speedFactor = 1f;
     public float fallspeed = 0.1f;
     public float fallheight = 0.2f;
+
+    public Transform startPosition;
 
     private RaycastHit track;
 
@@ -20,6 +22,7 @@ public class CartMove : MonoBehaviour
     TrackPiece lastPiece;
     float endAngleRemaing = 0;
 
+    
 
     void OnCollisionEnter(Collision collision)
     {
@@ -28,9 +31,15 @@ public class CartMove : MonoBehaviour
 
             Debug.Log("hittag");
             //do sth.
+            Singleton<GameController>.Instance.GameOver();
         }
     }
 
+    public void ResetCar()
+    {
+        transform.position = startPosition.position + new Vector3(0, 6.5f, 1.75f);
+        transform.rotation = startPosition.rotation;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +51,10 @@ public class CartMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Singleton<GameController>.Instance.IsStarted)
-       // {
+       if (Singleton<GameController>.Instance.IsStarted)
+       {
+            speed = Singleton<GameController>.Instance.Speed;
+
             pos = transform.position;
 
             if (Input.GetKey(KeyCode.A))
@@ -116,7 +127,7 @@ public class CartMove : MonoBehaviour
 
             cart.position = pos;
             //CursorLock();
-        //}
+        }
     }
 
     private void FixedUpdate()

@@ -63,8 +63,8 @@ public class UIController : MonoBehaviour
         Debug.Log("UIController.GameOver()");
 
         textGameOver.text = "You Crashed!! :b";
-        textGameOverTime.text = "Time: " + gameController.GameTime.ToString();
-        textGameOverDistance.text = "Distance: " + gameController.Distance.ToString();
+        textGameOverTime.text = "Time: " + string.Format("{0:F}", gameController.GameTime);
+        textGameOverDistance.text = "Dist: " + string.Format("{0:F}", gameController.Distance);
 
         textTime.gameObject.SetActive(false);
         textDistance.gameObject.SetActive(false);
@@ -102,9 +102,9 @@ public class UIController : MonoBehaviour
     {
         if (gameController.IsStarted) 
         {
-            textTime.text = "Time: " + gameController.GameTime;
-            textDistance.text = "Distance: " + gameController.Distance;
-            textSpeed.text = "Speed: " + gameController.Speed;
+            textTime.text = "Time: " + string.Format("{0:F}", gameController.GameTime);
+            textDistance.text = "Dist: " + string.Format("{0:F}", gameController.Distance);
+            textSpeed.text = "Speed: " + string.Format("{0:F}", gameController.Speed);
         }
     }
 }

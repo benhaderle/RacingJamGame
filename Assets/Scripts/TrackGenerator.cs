@@ -24,7 +24,7 @@ public class TrackGenerator : MonoBehaviour
     TrackPiece lastPieceAdded;
     TrackPiece oldestPiece;
 
-    float timer = 1f;
+    float timer = 5f;
 
     private void Start()
     {
@@ -80,7 +80,8 @@ public class TrackGenerator : MonoBehaviour
 
         //generate obstacles on piece
         int numToGenerate = Mathf.RoundToInt(Mathf.Clamp(3 / speed, .500001f, 5));
-        nextPiece.GenerateObstacles(numToGenerate);
+        if(nextPiece.transform.position.z > 100) nextPiece.GenerateObstacles(numToGenerate);
+
 
         //add piece to the end of the track
         activeTrackPieces.Add(nextPiece);
@@ -89,19 +90,25 @@ public class TrackGenerator : MonoBehaviour
 
     private void Update()
     {
-        timer -= Time.deltaTime;
+        if (Singleton<GameController>.Instance.IsStarted)
+        {
+            timer -= Time.deltaTime;
 
-        if(timer < 0) {
-            //adding new piece
-            GeneratePiece(Random.Range(0, trackPiecePrefabs.Length));
+            if (Singleton<GameController>.Instance.car.transform.position.z > oldestPiece.childPiece.transform.position.z)
+            {
+                //adding new piece
+                GeneratePiece(Random.Range(0, trackPiecePrefabs.Length));
 
-            //deleting oldest piece
-            activeTrackPieces.Remove(oldestPiece);
-            TrackPiece pieceToDelete = oldestPiece;
-            oldestPiece = pieceToDelete.childPiece;
-            Destroy(pieceToDelete.gameObject);
+                //deleting oldest piece
+                activeTrackPieces.Remove(oldestPiece);
+                TrackPiece pieceToDelete = oldestPiece;
+                oldestPiece = pieceToDelete.childPiece;
+                Destroy(pieceToDelete.gameObject);
 
-            timer = 3 / speed;
+                timer = 100 / Singleton<GameController>.Instance.Speed;
+            }
+
+            speed += Singleton<GameController>.Instance.acceleration;
         }
     }
 
@@ -113,5 +120,7 @@ public class TrackGenerator : MonoBehaviour
         activeTrackPieces.Clear();
 
         StartTrack();
+
+        timer = 5f;
     }
 }
