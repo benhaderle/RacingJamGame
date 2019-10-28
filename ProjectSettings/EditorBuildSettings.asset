@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TestMerge.unity
+    guid: 8e60db0c3cbf54866af9b55dfb977350
   m_configObjects: {}
